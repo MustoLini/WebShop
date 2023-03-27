@@ -2,6 +2,9 @@ package com.example.webshop.business;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "person")
 public class Person {
@@ -11,8 +14,10 @@ public class Person {
     private Long id;
     @Column(name = "name")
     private String name;
-    @OneToOne(fetch = FetchType.LAZY)
-    private Cart cart;
+    //Order Should be
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<CustomerOrder> customerOrders;
+
     private String passWord;
 
     public Person() {
@@ -22,8 +27,15 @@ public class Person {
     public Person(String name, String passWord) {
         this.name = name;
         this.passWord = passWord;
-        this.cart = new Cart();
+        customerOrders= new ArrayList<>();
 
+    }
+
+    public Person(Long id, String name, List<CustomerOrder> customerOrders, String passWord) {
+        this.id = id;
+        this.name = name;
+        this.customerOrders = customerOrders;
+        this.passWord = passWord;
     }
 
     public String getName() {
@@ -33,11 +45,6 @@ public class Person {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Cart getOrderCart() {
-        return cart;
-    }
-
 
     public Long getId() {
         return id;
