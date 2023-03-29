@@ -5,13 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<div th:each="g: ${goodsList}">
-    Name: <span th:text="${g.name}"></span>
-    Price: <span th:text="${g.price}"></span>
-    <form action="/goods" method="get">
-        <input type="hidden" name="id" th:value="${g.id}">
-        <input type="button" value="Add to ShoppingCart">
-    </form>
-</div>
+Login:
+<form action="/product" method="post">
+    Username/Email: <input type="text" name="loginUser"> </b>
+    Password: <input type="text" name="password"> </b>
+    <input type="submit" value="Submit">
+</form>
+<a href="/register">Register Yourself</a>
 </body>
 </html>
