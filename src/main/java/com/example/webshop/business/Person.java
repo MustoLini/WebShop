@@ -1,6 +1,8 @@
 package com.example.webshop.business;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,38 +14,43 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "name")
-    private String name;
+    @NotBlank
+    @Email
+    private String email;
     //Order Should be
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<CustomerOrder> customerOrders;
-
+    @NotBlank
     private String passWord;
 
     public Person() {
 
     }
 
-    public Person(String name, String passWord) {
-        this.name = name;
+    public Person(String email, String passWord) {
+        this.email = email;
         this.passWord = passWord;
         customerOrders= new ArrayList<>();
 
     }
 
-    public Person(Long id, String name, List<CustomerOrder> customerOrders, String passWord) {
+    public Person(Long id, String email, List<CustomerOrder> customerOrders, String passWord) {
         this.id = id;
-        this.name = name;
+        this.email = email;
         this.customerOrders = customerOrders;
         this.passWord = passWord;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String name) {
+        this.email = name;
+    }
+
+    public String getPassWord() {
+        return passWord;
     }
 
     public Long getId() {
