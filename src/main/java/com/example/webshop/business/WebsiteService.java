@@ -1,25 +1,37 @@
 package com.example.webshop.business;
 
 import com.example.webshop.data.PersonRepository;
+import com.example.webshop.data.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @SessionScope
 public class WebsiteService {
     @Autowired
+    ProductRepository productRepository;
+    @Autowired
     PersonRepository personRepository;
     Person person;
+    Product product;
+    Cart cart;
+
 
     WebsiteService() {
 
     }
 
-    public List<Person> getAll() {
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
+    public Product getByIdProduct(long id){
+        return productRepository.findById(id).get();
+    }
+
+    public List<Person> getAllPeople() {
         return personRepository.findAll();
     }
 
@@ -33,10 +45,13 @@ public class WebsiteService {
         List<Person> personList = personRepository.findByEmailAndPassWord(loginUser, password);
         if (personList.isEmpty()) {
             person = personRepository.save(new Person(loginUser, password));
-            return "";
+            return "This user is now register.";
         }
-        return "This user already exist";
+        return "This user already exist.";
+    }
 
-
+    public Product addProduct(String productName, Double productPrice, String productCategory) {
+        product = productRepository.save(new Product(productName, productPrice, productCategory));
+        return product;
     }
 }
