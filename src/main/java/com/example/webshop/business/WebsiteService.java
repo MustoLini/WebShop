@@ -21,7 +21,7 @@ public class WebsiteService {
 
 
     WebsiteService() {
-
+        cart= new Cart();
     }
 
     public List<Product> getAllProducts() {
@@ -37,7 +37,7 @@ public class WebsiteService {
 
     public Person login(String loginUser, String password) {
         List<Person> personList = personRepository.findByEmailAndPassWord(loginUser, password);
-        person = personList.get(1);
+        person = personList.get(0);
         return person;
     }
 
@@ -50,8 +50,14 @@ public class WebsiteService {
         return "This user already exist.";
     }
 
-    public Product addProduct(String productName, Double productPrice, String productCategory) {
+    public Product addProductIntoDB(String productName, Double productPrice, String productCategory) {
         product = productRepository.save(new Product(productName, productPrice, productCategory));
         return product;
     }
+    public Cart addProductIntoCart(Long id, int amount){
+        cart.cartItems.add(new CartItem(getByIdProduct(id),amount));
+        System.out.println(id+" "+ amount);
+        return cart;
+    }
+    public Cart getCart(){ return cart;}
 }
