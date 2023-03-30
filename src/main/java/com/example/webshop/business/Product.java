@@ -15,6 +15,28 @@ public class Product {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Product(String name, Double price, String category) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
     public Product(Long id, String name, String category, Double price) {
         this.id = id;
         this.name = name;
