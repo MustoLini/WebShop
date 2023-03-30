@@ -13,4 +13,6 @@ public class Cart {
     public Cart() {
         this.cartItems = new ArrayList<>();
     }
+
+     public List<CartItem> getCartItems(){return cartItems;}
 }
