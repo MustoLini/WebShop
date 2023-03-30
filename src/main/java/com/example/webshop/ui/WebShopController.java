@@ -1,6 +1,6 @@
 package com.example.webshop.ui;
 
-import com.example.webshop.business.Product;
+import com.example.webshop.business.Cart;
 import com.example.webshop.business.WebsiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,8 @@ public class WebShopController {
     @PostMapping("/login")
     public String login(@RequestParam String loginUser, @RequestParam String password, Model model){
         model.addAttribute("person", websiteService.login(loginUser,password));
-        return "redirect:/productShop";
+        model.addAttribute("products", websiteService.getAllProducts());
+        return "productShop";
     }
     @GetMapping("/register")
     public String registerWebsite(Model model){
@@ -34,20 +35,29 @@ public class WebShopController {
     }
     @PostMapping("/addingProducts")
     public String addProduct(@RequestParam String productName, @RequestParam Double price, @RequestParam String category, Model model){
-        model.addAttribute("product", websiteService.addProduct(productName,price,category));
+        model.addAttribute("product", websiteService.addProductIntoDB(productName,price,category));
         return "addingProducts";
     }
-    @PostMapping ("/productShop")
-    public String showAllProducts(Model model){
-        model.addAttribute("productShop",websiteService.getAllProducts());
+    @PostMapping ("/addintocart")
+    public String addIntoCart(@RequestParam Long index, @RequestParam int amount, Model model){
+        Cart cart= websiteService.addProductIntoCart(index,amount);
+        model.addAttribute("products", websiteService.getAllProducts());
+        System.out.println(index +" CArt " + amount);
+        model.addAttribute("cart",cart);
         return "productShop";
     }
-    @GetMapping("/product")
-    public String buyProduct(@RequestParam long id, Model model){
-        Product product=websiteService.getByIdProduct(id);
-        model.addAttribute("product",product);
-        return "/";
+    /*@GetMapping("/product")
+    public String buyProduct(@RequestParam long id,@RequestParam int amount, Model model){
+        Cart cart= websiteService.addProductIntoCart(id,amount);
+        model.addAttribute("cart",cart);
+        return "showCart";
+    }*/
+    @GetMapping("/showCart")
+    public String showCart(Model model){
+        model.addAttribute("cart",websiteService.getCart());
+        return "showCart";
     }
+
 
 
 }
