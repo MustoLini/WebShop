@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 public class CartItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -43,5 +43,8 @@ public class CartItem {
     public CartItem(Product product, int amount) {
         this.product = product;
         this.amount = amount;
+    }
+    public void removeOneFromAmount(){
+        this.amount--;
     }
 }
