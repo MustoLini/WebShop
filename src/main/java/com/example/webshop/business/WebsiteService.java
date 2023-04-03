@@ -60,4 +60,7 @@ public class WebsiteService {
         return cart;
     }
     public Cart getCart(){ return cart;}
+    public List<CartItem> removeCartItem(int id){
+       return cart.removeItemFromCart(id);
+    }
 }
