@@ -16,14 +16,13 @@ public class Cart {
         return cartItems;
     }
 
-    public List<CartItem> removeItemFromCart(Integer id) {
-        List<CartItem> cartItemCart = getCartItems();
-        if (cartItemCart.get(id).amount == 0) {
-            cartItemCart.remove(id);
-            return cartItemCart;
+    public List<CartItem> removeItemFromCart(int id) {
+        if (getCartItems().get(id).getAmount() == 1) {
+            getCartItems().remove(id);
+            return getCartItems();
         } else {
-            cartItemCart.get(id).removeOneFromAmount();
-            return cartItemCart;
+            getCartItems().get(id).removeOneFromAmount();
+            return getCartItems();
         }
 
     }
