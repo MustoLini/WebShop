@@ -46,16 +46,17 @@ public class WebShopController {
         model.addAttribute("cart",cart);
         return "productShop";
     }
-    /*@GetMapping("/product")
-    public String buyProduct(@RequestParam long id,@RequestParam int amount, Model model){
-        Cart cart= websiteService.addProductIntoCart(id,amount);
-        model.addAttribute("cart",cart);
-        return "showCart";
-    }*/
+
     @GetMapping("/showCart")
     public String showCart(Model model){
         model.addAttribute("cart",websiteService.getCart());
         return "showCart";
+    }
+    @PostMapping("/removeproductfromcart")
+    public String removeFromCart(Model model, @RequestParam Integer id){
+        websiteService.removeCartItem(id);
+        model.addAttribute("cart",websiteService.getCart());
+        return "showcart";
     }
 
 
