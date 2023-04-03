@@ -1,7 +1,5 @@
 package com.example.webshop.business;
 
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,5 +12,20 @@ public class Cart {
         this.cartItems = new ArrayList<>();
     }
 
-     public List<CartItem> getCartItems(){return cartItems;}
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public List<CartItem> removeItemFromCart(Integer id) {
+        List<CartItem> cartItemCart = getCartItems();
+        if (cartItemCart.get(id).amount == 0) {
+            cartItemCart.remove(id);
+            return cartItemCart;
+        } else {
+            cartItemCart.get(id).removeOneFromAmount();
+            return cartItemCart;
+        }
+
+    }
+
 }
