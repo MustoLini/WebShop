@@ -6,14 +6,15 @@
 </head>
 <body>
 Inside the cart
-    <div th:each="c , i : ${cart.cartItems}">
-       Name:<p th:text="${c.product.name}"></p>
-       Price:<p th:text="${c.product.price}"></p>
-       Amount:<p th:text="${c.amount}"></p>
-        <form action="/removeproductfromcart" method="post">
-            <input type="hidden" name="id" th:value="${i.index}">
-            <input name="removeItem" type="submit" value="Remove Product">
-        </form>
-    </div>
+<div th:each="c , i : ${cart.cartItems}">
+    Name:<p th:text="${c.product.name}"></p>
+    Price:<p th:text="${c.product.price}"></p>
+    Amount:<p th:text="${c.amount}"></p>
+    <form action="/removeproductfromcart" method="post">
+        <input type="hidden" name="id" th:value="${i.index}">
+        <input name="removeItem" type="submit" value="Remove Product">
+    </form>
+</div>
+    Amount to Pay: <p th:text="${amount}"></p>
 </body>
 </html>
