@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,13 +16,15 @@ public class WebsiteService {
     ProductRepository productRepository;
     @Autowired
     PersonRepository personRepository;
+
     Person person;
     Product product;
     Cart cart;
-
+    List<CustomerOrder> customerOrder;
 
     WebsiteService() {
         cart= new Cart();
+        customerOrder = new ArrayList<>();
     }
 
     public List<Product> getAllProducts() {
@@ -59,8 +62,20 @@ public class WebsiteService {
         System.out.println(id+" "+ amount);
         return cart;
     }
-    public Cart getCart(){ return cart;}
+    public Cart getCart(){return cart;}
     public List<CartItem> removeCartItem(int id){
        return cart.removeItemFromCart(id);
+    }
+    public void addIntoOrder(){
+        customerOrder.add(new CustomerOrder(getCart().getCartItems()));
+        person.setCustomerOrders(customerOrder);
+        clearCart();
+    }
+    public void clearCart(){
+        cart= new Cart();
+    }
+
+    public List<CustomerOrder> getCustomerOrder() {
+        return customerOrder;
     }
 }
