@@ -34,6 +34,14 @@ public class Person {
 
     }
 
+    public List<CustomerOrder> getCustomerOrders() {
+        return customerOrders;
+    }
+
+    public void setCustomerOrders(List<CustomerOrder> customerOrders) {
+        this.customerOrders = customerOrders;
+    }
+
     public Person(Long id, String email, List<CustomerOrder> customerOrders, String passWord) {
         this.id = id;
         this.email = email;
