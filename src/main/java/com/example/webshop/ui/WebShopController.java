@@ -50,15 +50,15 @@ public class WebShopController {
     @GetMapping("/showCart")
     public String showCart(Model model){
         model.addAttribute("cart",websiteService.getCart());
+        model.addAttribute("amount", websiteService.getCart().sumOfAllProducts());
         return "showCart";
     }
     @PostMapping("/removeproductfromcart")
     public String removeFromCart(Model model, @RequestParam Integer id){
         websiteService.removeCartItem(id);
+        model.addAttribute("amount", websiteService.getCart().sumOfAllProducts());
         model.addAttribute("cart",websiteService.getCart());
         return "showcart";
     }
-
-
 
 }
