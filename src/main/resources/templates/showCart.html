@@ -12,12 +12,12 @@ Inside the cart
     Amount:<p th:text="${c.amount}"></p>
     <form action="/removeproductfromcart" method="post">
         <input type="hidden" name="id" th:value="${i.index}">
-        <input name="removeItem" type="button" value="Remove Product">
+        <input name="removeItem" type="submit" value="Remove Product">
     </form>
 </div>
     Amount to Pay: <p th:text="${amount}"></p>
-    <form action="/placedorder"method="post">
-        <input name="placeOrder" type="button" value="Place Order">
+    <form action="/placeorder"method="post">
+        <input name="placeOrder" type="submit" value="Place Order">
     </form>
 </body>
 </html>
