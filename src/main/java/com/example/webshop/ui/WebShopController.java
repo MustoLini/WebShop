@@ -66,6 +66,12 @@ public class WebShopController {
         model.addAttribute("customersorders", websiteService.getCustomerOrders());
         return "orderPlaced";
     }
+    @PostMapping("/showspecifiedproduct")
+    public String searchForSpecifiedProduct(Model model, @RequestParam String specifiedProduct){
+        model.addAttribute("products", websiteService.findSpecificProduct(specifiedProduct));
+        return "productShop";
+
+    }
 
 
 

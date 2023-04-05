@@ -1,5 +1,6 @@
 package com.example.webshop.business;
 
+import com.example.webshop.data.OrderRepository;
 import com.example.webshop.data.PersonRepository;
 import com.example.webshop.data.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class WebsiteService {
     ProductRepository productRepository;
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
 
     Person person;
     Product product;
@@ -75,5 +79,9 @@ public class WebsiteService {
 
     public List<CustomerOrder> getCustomerOrders() {
         return person.getCustomerOrders();
+    }
+    public List<Product>findSpecificProduct( String nameOfProduct){
+        return productRepository.findByName(nameOfProduct);
+
     }
 }
