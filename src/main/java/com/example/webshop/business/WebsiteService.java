@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Service
 @SessionScope
@@ -83,5 +85,15 @@ public class WebsiteService {
     public List<Product>findSpecificProduct( String nameOfProduct){
         return productRepository.findByName(nameOfProduct);
 
+    }
+    public List<Product> findBySpecificCategory(String category){
+        return productRepository.findByCategory(category);
+    }
+    public Set<String> getAllCategories(){
+        Set<String> categories= new TreeSet<>();
+        for (Product p: productRepository.findAll()) {
+            categories.add(p.getCategory());
+        }
+        return categories;
     }
 }
