@@ -1,7 +1,6 @@
 package com.example.webshop.ui;
 
 import com.example.webshop.business.Cart;
-import com.example.webshop.business.CustomerOrder;
 import com.example.webshop.business.WebsiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +63,7 @@ public class WebShopController {
     @PostMapping("/placeorder")
     public String placeOrder(Model model){
         websiteService.addIntoOrder();
-        model.addAttribute("customersorder", websiteService.getCustomerOrder());
+        model.addAttribute("customersorders", websiteService.getCustomerOrders());
         return "orderPlaced";
     }
 
