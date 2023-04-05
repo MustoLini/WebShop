@@ -17,6 +17,7 @@ public class WebShopController {
     public String login(@RequestParam String loginUser, @RequestParam String password, Model model){
         model.addAttribute("person", websiteService.login(loginUser,password));
         model.addAttribute("products", websiteService.getAllProducts());
+        model.addAttribute("category", websiteService.getAllCategories());
         return "productShop";
     }
     @GetMapping("/register")
@@ -42,6 +43,7 @@ public class WebShopController {
     public String addIntoCart(@RequestParam Long index, @RequestParam int amount, Model model){
         Cart cart= websiteService.addProductIntoCart(index,amount);
         model.addAttribute("products", websiteService.getAllProducts());
+        model.addAttribute("category", websiteService.getAllCategories());
         System.out.println(index +" CArt " + amount);
         model.addAttribute("cart",cart);
         return "productShop";
@@ -69,8 +71,14 @@ public class WebShopController {
     @PostMapping("/showspecifiedproduct")
     public String searchForSpecifiedProduct(Model model, @RequestParam String specifiedProduct){
         model.addAttribute("products", websiteService.findSpecificProduct(specifiedProduct));
+        model.addAttribute("category", websiteService.getAllCategories());
         return "productShop";
-
+    }
+    @PostMapping("/showspecifiedcategory")
+    public String searchForSpecifiedCategory(Model model,@RequestParam String chosencategory){
+        model.addAttribute("category", websiteService.getAllCategories());
+        model.addAttribute("products", websiteService.findBySpecificCategory(chosencategory));
+        return "productShop";
     }
 
 
