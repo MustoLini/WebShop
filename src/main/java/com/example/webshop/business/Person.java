@@ -64,6 +64,10 @@ public class Person {
     public Long getId() {
         return id;
     }
+    public void addOrder(CustomerOrder customerOrder){
+        customerOrders.add(customerOrder);
+
+    }
 
     public void setId(Long id) {
         this.id = id;
