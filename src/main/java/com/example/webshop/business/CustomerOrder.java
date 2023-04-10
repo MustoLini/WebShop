@@ -6,15 +6,22 @@ import java.util.List;
 
 @Entity
 public class CustomerOrder {
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    List<CartItem> cartItems;
+    @ManyToOne
+    Person person;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    List<CartItem> cartItems;
 
-    @ManyToOne
-    Person person ;
+    public CustomerOrder(List<CartItem> cartItems, Person person) {
+        this.person = person;
+        this.cartItems = cartItems;
+    }
+
+    public CustomerOrder() {
+    }
 
     public Person getPerson() {
         return person;
@@ -24,11 +31,6 @@ public class CustomerOrder {
         this.person = person;
     }
 
-    public CustomerOrder(List<CartItem> cartItems, Person person) {
-        this.person= person;
-        this.cartItems = cartItems;
-    }
-
     public List<CartItem> getCartItems() {
         return cartItems;
     }
@@ -36,10 +38,6 @@ public class CustomerOrder {
     public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
-
-    public CustomerOrder() {
-    }
-
 
     public Long getId() {
         return id;
