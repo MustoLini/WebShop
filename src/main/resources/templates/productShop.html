@@ -30,5 +30,8 @@
     </form>
 </div>
 <a href="showCart">Show Cart</a>
+<span th:if="${person.admin==true}">
+    <a href="/addingProducts">Go Admin Mode</a>
+</span>
 </body>
 </html>
