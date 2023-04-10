@@ -4,14 +4,21 @@ import jakarta.persistence.*;
 
 @Entity
 public class CartItem {
+    @ManyToOne(fetch = FetchType.LAZY)
+    Product product;
+    int amount;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    Product product;
-    int amount;
+    public CartItem() {
+    }
+
+    public CartItem(Product product, int amount) {
+        this.product = product;
+        this.amount = amount;
+    }
 
     public Long getId() {
         return id;
@@ -19,9 +26,6 @@ public class CartItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public CartItem() {
     }
 
     public Product getProduct() {
@@ -40,11 +44,7 @@ public class CartItem {
         this.amount = amount;
     }
 
-    public CartItem(Product product, int amount) {
-        this.product = product;
-        this.amount = amount;
-    }
-    public void removeOneFromAmount(){
+    public void removeOneFromAmount() {
         this.amount--;
     }
 }
