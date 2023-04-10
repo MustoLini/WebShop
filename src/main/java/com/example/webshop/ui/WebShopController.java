@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 @Controller
 public class WebShopController {
     @Autowired
@@ -25,8 +26,11 @@ public class WebShopController {
         return "register";
     }
     @PostMapping ("/register")
-    public String register(@RequestParam String loginUser, @RequestParam String password, Model model){
-        String checker= websiteService.checkIfUserExist(loginUser, password);
+    public String register(@RequestParam String loginUser, @RequestParam String password,@RequestParam(value = "adminBox", required = false) Boolean adminBox, Model model){
+        if (adminBox== null){
+            adminBox =false;
+        }
+        String checker= websiteService.checkIfUserExist(loginUser, password, adminBox);
         model.addAttribute("checker", checker);
         return "register";
     }
