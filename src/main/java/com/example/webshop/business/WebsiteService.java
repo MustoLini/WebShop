@@ -48,10 +48,10 @@ public class WebsiteService {
         return person;
     }
 
-    public String checkIfUserExist(String loginUser, String password) {
+    public String checkIfUserExist(String loginUser, String password, boolean admin) {
         List<Person> personList = personRepository.findByEmailAndPassWord(loginUser, password);
         if (personList.isEmpty()) {
-            person = personRepository.save(new Person(loginUser, password));
+            person = personRepository.save(new Person(loginUser, password, admin));
             return "This user is now register.";
         }
         return "This user already exist.";
