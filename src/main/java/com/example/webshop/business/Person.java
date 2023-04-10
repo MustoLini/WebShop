@@ -22,16 +22,28 @@ public class Person {
     private List<CustomerOrder> customerOrders;
     @NotBlank
     private String passWord;
+    private boolean admin;
 
     public Person() {
 
     }
 
+    public Person(String email, String passWord, Boolean admin) {
+        this.email = email;
+        this.passWord = passWord;
+        customerOrders= new ArrayList<>();
+        this.admin= admin;
+    }
     public Person(String email, String passWord) {
         this.email = email;
         this.passWord = passWord;
         customerOrders= new ArrayList<>();
+        this.admin= false;
+    }
 
+
+    public boolean isAdmin() {
+        return admin;
     }
 
     public List<CustomerOrder> getCustomerOrders() {
@@ -42,10 +54,11 @@ public class Person {
         this.customerOrders = customerOrders;
     }
 
-    public Person(Long id, String email, List<CustomerOrder> customerOrders, String passWord) {
+    public Person(Long id, String email, List<CustomerOrder> customerOrders, String passWord, Boolean admin) {
         this.id = id;
         this.email = email;
         this.customerOrders = customerOrders;
+        this.admin= admin;
         this.passWord = passWord;
     }
 
