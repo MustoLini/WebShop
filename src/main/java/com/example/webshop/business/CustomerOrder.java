@@ -10,6 +10,7 @@ public class CustomerOrder {
     List<CartItem> cartItems;
     @ManyToOne
     Person person;
+    Boolean shipping;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -18,9 +19,18 @@ public class CustomerOrder {
     public CustomerOrder(List<CartItem> cartItems, Person person) {
         this.person = person;
         this.cartItems = cartItems;
+        this.shipping = false;
     }
 
     public CustomerOrder() {
+    }
+
+    public Boolean getShipping() {
+        return shipping;
+    }
+
+    public void setShipping(Boolean shipping) {
+        this.shipping = shipping;
     }
 
     public Person getPerson() {
