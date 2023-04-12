@@ -1,5 +1,6 @@
 package com.example.webshop.data;
 
+import com.example.webshop.business.CustomerOrder;
 import com.example.webshop.business.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 
