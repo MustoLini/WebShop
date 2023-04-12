@@ -3,6 +3,7 @@ package com.example.webshop.ui;
 import com.example.webshop.business.Cart;
 import com.example.webshop.business.WebsiteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,9 @@ public class WebShopController {
         model.addAttribute("person", websiteService.login(loginUser,password));
         model.addAttribute("products", websiteService.getAllProducts());
         model.addAttribute("category", websiteService.getAllCategories());
+        if (websiteService.getAdminLogin()){
+            return "adminPage";
+        }
         return "productShop";
     }
     @GetMapping("/register")
@@ -84,6 +88,19 @@ public class WebShopController {
         model.addAttribute("products", websiteService.findBySpecificCategory(chosencategory));
         return "productShop";
     }
+    @GetMapping("/showAllOrders")
+    public String addShowAllOrdersWebsite(Model model){
+        model.addAttribute("customersordersinadmimode", websiteService.getAllCustomersOrders());
+        model.addAttribute("person", websiteService.getAllPeople());
+        return "showAllOrders";
+    }
+
+    @PostMapping("/showAllOrders")
+    public String showAllOrdersThoughAdmin(Model model){
+        model.addAttribute("customersordersinadmimode", websiteService.getAllCustomersOrders());
+        return "showAllOrders";
+    }
+
 
 
 
