@@ -3,11 +3,13 @@ package com.example.webshop.business;
 import com.example.webshop.data.OrderRepository;
 import com.example.webshop.data.PersonRepository;
 import com.example.webshop.data.ProductRepository;
+import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,10 +27,12 @@ public class WebsiteService {
     Person person;
     Product product;
     Cart cart;
+    CustomerOrder customerOrder;
 
 
     WebsiteService() {
         cart= new Cart();
+        customerOrder= new CustomerOrder(cart.getCartItems(),person);
     }
 
     public List<Product> getAllProducts() {
@@ -82,6 +86,13 @@ public class WebsiteService {
     public List<CustomerOrder> getCustomerOrders() {
         return person.getCustomerOrders();
     }
+    public List<CustomerOrder> getAllCustomersOrders(){
+        return orderRepository.findAll();
+    }
+    public List<Person> personList(){
+        return personRepository.findAll();
+    }
+
     public List<Product>findSpecificProduct( String nameOfProduct){
         return productRepository.findByName(nameOfProduct);
 
@@ -95,5 +106,8 @@ public class WebsiteService {
             categories.add(p.getCategory());
         }
         return categories;
+    }
+    public Boolean getAdminLogin(){
+        return person.isAdmin();
     }
 }
