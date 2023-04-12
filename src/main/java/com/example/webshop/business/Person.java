@@ -18,7 +18,7 @@ public class Person {
     @Email
     private String email;
     //Order Should be
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<CustomerOrder> customerOrders;
     @NotBlank
     private String passWord;
