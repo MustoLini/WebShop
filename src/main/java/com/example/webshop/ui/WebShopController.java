@@ -96,7 +96,10 @@ public class WebShopController {
     }
 
     @PostMapping("/showAllOrders")
-    public String showAllOrdersThoughAdmin(Model model){
+    public String showAllOrdersThoughAdmin(Model model, @RequestParam Integer ship){
+        websiteService.getAllCustomersOrders().get(ship-1).setShipping(true);
+        websiteService.saveOrder(websiteService.getAllCustomersOrders().get(ship-1));
+        model.addAttribute("person", websiteService.getAllPeople());
         model.addAttribute("customersordersinadmimode", websiteService.getAllCustomersOrders());
         return "showAllOrders";
     }

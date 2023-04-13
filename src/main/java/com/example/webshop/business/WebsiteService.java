@@ -110,4 +110,7 @@ public class WebsiteService {
     public Boolean getAdminLogin(){
         return person.isAdmin();
     }
+    public void saveOrder(CustomerOrder customerOrder){
+        customerOrder =orderRepository.save(customerOrder);
+    }
 }

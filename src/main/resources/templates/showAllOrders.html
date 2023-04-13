@@ -6,22 +6,21 @@
 </head>
 <body>
 <div th:each="o : ${customersordersinadmimode}">
+    Person:
+    <td th:text="${o.person.email}"></td>
     <div th:each="ci : ${o.cartItems}">
-        <div th:each="p : ${person}">
-            Person:
-            <td th:text="${p.email}"></td>
-            Product name :
-            <td th:text=" ${ci.product.getName()}"></td>
-            : Amount :
-            <td th:text="${ci.amount}"></td>
-            : Ship :
-            <td th:text="${o.shipping}"></td>
-            <form action="/shipProduct" method="post">
-                Ship: <input type="submit" name="shipped" value="Ship">
-            </form>
-        </div>
+        : Product name :
+        <td th:text="${ci.product.name}"></td>
+        : Amount:
+        <td th:text="${ci.amount}"></td>
+        : Ship :
+        <td th:text="${o.shipping}"></td>
 
     </div>
+    <form action="/showAllOrders" method="post">
+        <input type="hidden" name="ship"  th:value="${o.id}">
+        <input type="submit" name="shipped" value="Ship">
+    </form>
 </div>
 </body>
 </html>
