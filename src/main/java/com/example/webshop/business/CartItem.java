@@ -47,4 +47,11 @@ public class CartItem {
     public void removeOneFromAmount() {
         this.amount--;
     }
+
+    @Override
+    public String toString() {
+        return
+                "Product: " + product +
+                ", Amount: " + amount ;
+    }
 }
