@@ -27,6 +27,8 @@ public class WebsiteService {
     Product product;
     Cart cart;
     CustomerOrder customerOrder;
+    @Autowired
+    EmailService emailService;
 
 
     WebsiteService() {
@@ -76,6 +78,7 @@ public class WebsiteService {
     public void addIntoOrder(){
         person.addOrder(new CustomerOrder(getCart().getCartItems(),person));
         person = personRepository.save(person);
+        emailService.sendEmail(person.getEmail(),"What You have Ordered", "This is all the products you have ordered" + person.getCustomerOrders());
         clearCart();
     }
     public void clearCart(){
