@@ -56,4 +56,10 @@ public class CustomerOrder {
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "CustomerOrder" +
+                "Cart Items: " + cartItems;
+    }
 }
