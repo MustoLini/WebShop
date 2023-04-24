@@ -3,13 +3,11 @@ package com.example.webshop.business;
 import com.example.webshop.data.OrderRepository;
 import com.example.webshop.data.PersonRepository;
 import com.example.webshop.data.ProductRepository;
-import jakarta.persistence.criteria.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -39,6 +37,10 @@ public class WebsiteService {
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
+    public List<Product> deleteProduct(Integer id){
+        productRepository.deleteById(Long.valueOf(id));
+        return productRepository.findAll();
+    }
     public Product getByIdProduct(long id){
         return productRepository.findById(id).get();
     }
@@ -64,6 +66,12 @@ public class WebsiteService {
 
     public Product addProductIntoDB(String productName, Double productPrice, String productCategory) {
         product = productRepository.save(new Product(productName, productPrice, productCategory));
+        return product;
+    }
+    public Product updatePrice(Integer id, Double price){
+        product= productRepository.findById(Long.valueOf(id)).get();
+        product.setPrice(price);
+        product= productRepository.save(product);
         return product;
     }
     public Cart addProductIntoCart(Long id, int amount){

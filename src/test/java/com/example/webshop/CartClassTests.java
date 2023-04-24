@@ -2,13 +2,12 @@ package com.example.webshop;
 
 import com.example.webshop.business.Product;
 import com.example.webshop.business.WebsiteService;
-import com.example.webshop.data.OrderRepository;
-import com.example.webshop.data.PersonRepository;
-import com.example.webshop.data.ProductRepository;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,9 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CartClassTests {
     @Autowired
     WebsiteService websiteService;
-    Product product = Mockito.mock(Product.class);
-    Product product2 = Mockito.mock(Product.class);
-    Product product3 = Mockito.mock(Product.class);
+    Product product = new Product("Bulle",4.0, "Bakverk");
+    Product product2 = new Product("Pc", 10000.0, "Dator");
+    Product product3 = new Product("HårdDisk",500.0,"HårdWarda");
 
     @BeforeEach
     void setUp() {
@@ -46,6 +45,10 @@ class CartClassTests {
     void clearCartTest() {
         websiteService.clearCart();
         assertEquals(0, websiteService.getCart().getCartItems().size());
+    }
+    @Test
+    void sumCartTest(){
+        assertEquals(41008.0,websiteService.getCart().sumOfAllProducts());
     }
 
 

@@ -14,6 +14,10 @@ public class Product {
     private String category;
     private Double price;
 
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public Product() {
 
     }
